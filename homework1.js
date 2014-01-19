@@ -1,0 +1,170 @@
+var cs = [
+  "315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e"
+  , "234c02ecbbfbafa3ed18510abd11fa724fcda2018a1a8342cf064bbde548b12b07df44ba7191d9606ef4081ffde5ad46a5069d9f7f543bedb9c861bf29c7e205132eda9382b0bc2c5c4b45f919cf3a9f1cb74151f6d551f4480c82b2cb24cc5b028aa76eb7b4ab24171ab3cdadb8356f"
+  , "32510ba9a7b2bba9b8005d43a304b5714cc0bb0c8a34884dd91304b8ad40b62b07df44ba6e9d8a2368e51d04e0e7b207b70b9b8261112bacb6c866a232dfe257527dc29398f5f3251a0d47e503c66e935de81230b59b7afb5f41afa8d661cb"
+  , "32510ba9aab2a8a4fd06414fb517b5605cc0aa0dc91a8908c2064ba8ad5ea06a029056f47a8ad3306ef5021eafe1ac01a81197847a5c68a1b78769a37bc8f4575432c198ccb4ef63590256e305cd3a9544ee4160ead45aef520489e7da7d835402bca670bda8eb775200b8dabbba246b130f040d8ec6447e2c767f3d30ed81ea2e4c1404e1315a1010e7229be6636aaa"
+  , "3f561ba9adb4b6ebec54424ba317b564418fac0dd35f8c08d31a1fe9e24fe56808c213f17c81d9607cee021dafe1e001b21ade877a5e68bea88d61b93ac5ee0d562e8e9582f5ef375f0a4ae20ed86e935de81230b59b73fb4302cd95d770c65b40aaa065f2a5e33a5a0bb5dcaba43722130f042f8ec85b7c2070"
+  , "32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd2061bbde24eb76a19d84aba34d8de287be84d07e7e9a30ee714979c7e1123a8bd9822a33ecaf512472e8e8f8db3f9635c1949e640c621854eba0d79eccf52ff111284b4cc61d11902aebc66f2b2e436434eacc0aba938220b084800c2ca4e693522643573b2c4ce35050b0cf774201f0fe52ac9f26d71b6cf61a711cc229f77ace7aa88a2f19983122b11be87a59c355d25f8e4"
+  , "32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd90f1fa6ea5ba47b01c909ba7696cf606ef40c04afe1ac0aa8148dd066592ded9f8774b529c7ea125d298e8883f5e9305f4b44f915cb2bd05af51373fd9b4af511039fa2d96f83414aaaf261bda2e97b170fb5cce2a53e675c154c0d9681596934777e2275b381ce2e40582afe67650b13e72287ff2270abcf73bb028932836fbdecfecee0a3b894473c1bbeb6b4913a536ce4f9b13f1efff71ea313c8661dd9a4ce"
+  , "315c4eeaa8b5f8bffd11155ea506b56041c6a00c8a08854dd21a4bbde54ce56801d943ba708b8a3574f40c00fff9e00fa1439fd0654327a3bfc860b92f89ee04132ecb9298f5fd2d5e4b45e40ecc3b9d59e9417df7c95bba410e9aa2ca24c5474da2f276baa3ac325918b2daada43d6712150441c2e04f6565517f317da9d3"
+  , "271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad6e04d513e96d99de2569bc5e50eeeca709b50a8a987f4264edb6896fb537d0a716132ddc938fb0f836480e06ed0fcd6e9759f40462f9cf57f4564186a2c1778f1543efa270bda5e933421cbe88a4a52222190f471e9bd15f652b653b7071aec59a2705081ffe72651d08f822c9ed6d76e48b63ab15d0208573a7eef027"
+  , "466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83"
+]
+
+var ts = "32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e9052ba6a8cd8257bf14d13e6f0a803b54fde9e77472dbff89d71b57bddef121336cb85ccb8f3315f4b52e301d16e9f52f904"
+
+var key0 = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+
+function intToHexByte(value) {
+  var result = value.toString(16)
+  if (result.length == 1) return "0" + result;
+
+  return result
+}
+
+function xorStrings(a,b) {
+
+  var lenA = a.length
+    , lenB = b.length
+    , setA, setB
+    , result = ["",[],""]
+    , intValue
+    , hexValue
+
+  for (var i = 0; i < lenA && i < lenB ; i= i+2) {
+    setA = "0x" + a.substr(i,2)
+    setB = "0x" + b.substr(i,2)
+
+    intValue = parseInt(setA) ^ parseInt(setB)
+
+    hexValue = intToHexByte(intValue)
+    result[0] += hexValue
+
+    if((65 <= intValue && intValue <= 90) || ( 97 <= intValue && intValue <= 122)) {
+      result[1].push(setA + "_" +setB)
+      result[2] += ("__");
+    } else {
+      result[2] += hexValue
+    }
+  }
+
+  return result
+}
+
+function loopXorByIndex(index) {
+  cs.forEach(function(cypher, loopIndex) {
+    if (index != loopIndex) {
+      console.log(loopIndex + ":" + xorStrings(cypher,cs[index])[2])
+    }
+  })
+}
+
+// --- C1 Xor C2
+// No chars in common between c1 and c2
+// All double spaces are sign of a space on c1 and a space on c2
+// Hypothesis: since no sentence ends in a whitespace. Either last char in C2 is a "." or a letter and there's a whitespace in C1. To test this let's test all other larger strings with C2
+// Length of XOR is not the same, maybe it's the 0's. Still not ok. How about 1 to hex? 0x1 or 0x01. It was it.
+
+// Wait a minute: if I want to make sure where are the whitespaces just XOR C1 with everything else, look at them, and the common whitespaces is a whitespace on C1, and so on.
+// So let's do it. So, yes, I can have either a __ or a 00 (both whitespaces). I can't have anything else right? No, we can have a xor or '_' with a non-alpha. For example:
+// Hypothesis: C0 with C*\{0} on C8, the onl two places without a whitespace are the 00 (both whitespaces) and 08, which I can only assyme it's a "(". Let's map the breaks inline for C0
+
+// Some are hard, the ones that are half whitespaces half not, you can't be sure if the whitespace is either on the original or the in all the others
+// Conclusion: I can guarantee that for example (see bellow). char 6 on c7, is definitely a whitespace. that or all the other strings are whitespaces in that position. (check cypher0 example)
+// So, can't we get the key now? We know that C0 at that position is 32decimal 20hex. so 0x20 ^ 0x4e has to be the key at that position =  6E
+// The magic begins, so what does 6E gives with everything else.
+
+/*
+ Cypher0
+ *:315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e
+
+ 1:1210__0613____09140f10__02__1b0a04__020c__070b18____15__1f0800____1e02__061d06____0b0a02021019__1016____3a00____00____0e1e1d0a____12171b0117001b0e____1c0c1d160a__0d11____19061a11__0e__17__08____3714050b17______1b__070e000e__
+ 2:030d____0f07__03__171c061c____0907__1b01__290017__5d______0007____1e02__1911__0e__1a1f191f120604021b____24____020f____1305050a0007__0f1b1b____12__03__001614__0613____150d__2d15060023__0a0a0f
+ 3:030d____0207__0e0411000a0a____1817__0a000e0701______15____1e1109____100f0d060c1d__0a0003__1418021d01____3f08000f0e01__12__121c00010e0c10__13____0b0c__06101f16000a__11____180d010b__05000616______01151b010b03001101__1018021f__1b06__0409__1b1b04111b__0d0d__3f0a0c1e1d____3b1b01081c
+ 4:0e0a____0501____15__030e1c____1c0a000c0014__04________00180f__0b__03__0a0b0d06____110000__14__02070a0e__3f0a0010110b__080d1f06__0312__1d01____000d04__071b0a__0613____150d__24151a______0b1b02__1617130e__060b__190a__16081c0c001b06__2609__04190817
+ 5:030d__1104____1404__00181d00001115__1d__0204__11________180e0609__190c______0105__17__1a181c170d__04____3b____06041e001209101d__1212__070e14____0e17__03__140d1000005d5c__030511____08__100a150c__130f0d__110c__00____0a0811030003011e09____110c1d__00______371b11__0115__2d__141e0a14
+ 6:030d__1104____1404__00181d00001115__1d__0204__11________101b1518__08____011a10____0b0e19__1418091d045d00230d____2601__041e1d02__0815__0000____070d____1c001907__14__________1d1b____13__0504____1c17__0a0101010c__0e__06__1d05____1c1a041100060c1c101a________1b0a00__33__3e040002081c
+ 7:00000000000000150406__1b1a____180a__0001__150d17____15__1f0c__0b__1805__0707__18__0b0e1d000c__0c14____002017__0d06____0818__06____12061a1b____1a0c____011b1e170817__11____050c__18__16__16__01__1b1f__1d0600____1a19__100e1c06__1a1c________1000__361b__40__20
+ 8:16__08131307__071506__0417__5d______00161f1b1506__5e5b00040a1c0d__14__121a150108____5c__1119130a001a____3a160c__0f0f__04000a______11111b0c17__011a0000081a1f__0217________03001a0f000a__1d1c__0015__111b010601__011d____071d1900110611171c__000003025f00____36__03__0206__2b041619171c
+ 9:__31__06__2d__08020a070a____0c0e0a__0a310401111b__5f____0e__5c__10________1010828ce2010803__17170b03______04____1506____0d011b000907____1800__00010b____1a__10__01__5d____190e__0b__05__17____
+ sum
+ =:zzzz__zzzzzz__zzzzzzzzzzzz__zzzzzz__zzzzzzzzzzzz__zzzz__zzzzzzzz__zzzzzzzzzzzzzz__zzzzzz--zzzzzzzzzzzz__zzzz__zzzzzz__zzzzzzzz__zzzzxxzzzzzz__zzzzzz__zzzzzzzzzzzz__zz----zzzzzzzz__zz__zzzzzz--zzzzzzzzzzzzzz__zzzz__zzzzzzzz__zzzzzzzzzz__zzzzzzzzzz__zzzzzzzzzzzzzzzz__zzzzzzzzzzzz
+
+ key
+ =:zzzz6EzzzzzzD8zzzzzzzzzzzz63zzzzzzAFzzzzzzzzzzzzA0zzzzE9zzzzzzzz69zzzzzzzzzzzzzz1AzzzzzzzzzzzzzzzzzzzzF0zzzz48zzzzzz02zzzzzzzz77zzzzzzzzzzzz9Czzzzzzzzzzzzzzzzzzzz9azzzzzzzzzzzzzzzzzzC7zzzzzzzzzzzzzzzzzzzzzzzzzzzzDBzzzzzzzzzzzzzzzzzzzzA1zzzzzzzzzz50zzzzzzzzzzzzzzzz91zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+
+ // Decrypting:
+
+ "315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e"
+ "234c02ecbbfbafa3ed18510abd11fa724fcda2018a1a8342cf064bbde548b12b07df44ba7191d9606ef4081ffde5ad46a5069d9f7f543bedb9c861bf29c7e205132eda9382b0bc2c5c4b45f919cf3a9f1cb74151f6d551f4480c82b2cb24cc5b028aa76eb7b4ab24171ab3cdadb8356f"
+ "32510ba9a7b2bba9b8005d43a304b5714cc0bb0c8a34884dd91304b8ad40b62b07df44ba6e9d8a2368e51d04e0e7b207b70b9b8261112bacb6c866a232dfe257527dc29398f5f3251a0d47e503c66e935de81230b59b7afb5f41afa8d661cb"
+ "32510ba9aab2a8a4fd06414fb517b5605cc0aa0dc91a8908c2064ba8ad5ea06a029056f47a8ad3306ef5021eafe1ac01a81197847a5c68a1b78769a37bc8f4575432c198ccb4ef63590256e305cd3a9544ee4160ead45aef520489e7da7d835402bca670bda8eb775200b8dabbba246b130f040d8ec6447e2c767f3d30ed81ea2e4c1404e1315a1010e7229be6636aaa"
+ "3f561ba9adb4b6ebec54424ba317b564418fac0dd35f8c08d31a1fe9e24fe56808c213f17c81d9607cee021dafe1e001b21ade877a5e68bea88d61b93ac5ee0d562e8e9582f5ef375f0a4ae20ed86e935de81230b59b73fb4302cd95d770c65b40aaa065f2a5e33a5a0bb5dcaba43722130f042f8ec85b7c2070"
+ "32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd2061bbde24eb76a19d84aba34d8de287be84d07e7e9a30ee714979c7e1123a8bd9822a33ecaf512472e8e8f8db3f9635c1949e640c621854eba0d79eccf52ff111284b4cc61d11902aebc66f2b2e436434eacc0aba938220b084800c2ca4e693522643573b2c4ce35050b0cf774201f0fe52ac9f26d71b6cf61a711cc229f77ace7aa88a2f19983122b11be87a59c355d25f8e4"
+ "32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd90f1fa6ea5ba47b01c909ba7696cf606ef40c04afe1ac0aa8148dd066592ded9f8774b529c7ea125d298e8883f5e9305f4b44f915cb2bd05af51373fd9b4af511039fa2d96f83414aaaf261bda2e97b170fb5cce2a53e675c154c0d9681596934777e2275b381ce2e40582afe67650b13e72287ff2270abcf73bb028932836fbdecfecee0a3b894473c1bbeb6b4913a536ce4f9b13f1efff71ea313c8661dd9a4ce"
+ "315c4eeaa8b5f8bffd11155ea506b56041c6a00c8a08854dd21a4bbde54ce56801d943ba708b8a3574f40c00fff9e00fa1439fd0654327a3bfc860b92f89ee04132ecb9298f5fd2d5e4b45e40ecc3b9d59e9417df7c95bba410e9aa2ca24c5474da2f276baa3ac325918b2daada43d6712150441c2e04f6565517f317da9d3"
+ "271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad6e04d513e96d99de2569bc5e50eeeca709b50a8a987f4264edb6896fb537d0a716132ddc938fb0f836480e06ed0fcd6e9759f40462f9cf57f4564186a2c1778f1543efa270bda5e933421cbe88a4a52222190f471e9bd15f652b653b7071aec59a2705081ffe72651d08f822c9ed6d76e48b63ab15d0208573a7eef027"
+ "466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83"
+ ]
+
+
+ */
+
+var key1 = "zzzz6EzzzzzzD8zzzzzzzzzzzz63zzzzzzAFzzzzzzzzzzzzA0zzzzE9zzzzzzzz69zzzzzzzzzzzzzz1AzzzzzzzzzzzzzzzzzzzzF0zzzz48zzzzzz02zzzzzzzz77zzzzzzzzzzzz9Czzzzzzzzzzzzzzzzzzzz9azzzzzzzzzzzzzzzzzzC7zzzzzzzzzzzzzzzzzzzzzzzzzzzzDBzzzzzzzzzzzzzzzzzzzzA1zzzzzzzzzz50zzzzzzzzzzzzzzzz91zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+
+function decodeCiphers(k) {
+
+  var keyLength = k.length
+
+  cs.forEach(function(cypher, loopIndex) {
+
+    var cypherLength = cypher.length
+      , keyByte, cypherByte
+      , result = ""
+      , intValue
+      , hexValue
+
+    for (var i = 0; i < cypherLength && i < keyLength ; i= i+2) {
+
+      cypherByte = "0x" + cypher.substr(i,2)
+      keyByte = "0x" + k.substr(i,2)
+
+      if(keyByte == "0xzz") {
+        result += "-"
+      } else {
+        intValue = parseInt(cypherByte) ^ parseInt(keyByte)
+        result += String.fromCharCode(intValue)
+      }
+    }
+
+    console.log("decoded " + loopIndex + ":" + result);
+  })
+}
+
+//decodeCiphers(key1)
+loopXorByIndex(1)
+
+/*
+
+
+ 0:1210__0613____09140f10__02__1b0a04__020c__070b18____15__1f0800____1e02__061d06____0b0a02021019__1016____3a00____00____0e1e1d0a____12171b0117001b0e____1c0c1d160a__0d11____19061a11__0e__17__08____3714050b17______1b__070e000e__
+ 2:111d09__1c__140a__180c__1e15__03030d190d002e0b0f1615__05__080700000000001f0c____0611151b1d021f__120d061d1e__10__0f00071d1b1800______18001a____09____021c1a09__0c__5f________2b0f17__2d1a1d__07
+ 3:111d09__11__0707101e10__0806__12130d080c__000a__0d000015__1611__05__12__0b1b0a__00010a01__0401__0d170a1b0508____0e__081c__0f16____1c1b0b__04____05__131a1c02000a____00311c010b1b1a080b__11____0f0036011e0a1c40____1a0b1716021104
+ 4:1c1a19__16__19__01__13__1e06__160e__0e0c____0f__1c1c____0707____0f1d____0d100000121a0a02__04____171c__18050a____11__000613020c08__00__0600____1b03__0f1b1717__0c__5f________220f0b0e__271c__0a00__20070b__11__1e__110611061c02__
+ 5:111d09171700161d10__10__1f__1b1b11071f____03__091d00__00070606__1e070e00____07__151c__181a0c0e____120a0301__18__04____1c170d1717__00__1c0f03____00__0c1f__091b1a__0d__281a1a030b__1e060607__1d__00241b08__06__12____1f0d06110d__
+ 6:111d09171700161d10__10__1f__1b1b11071f____03__091609__1b0f1315__0616__00070716000000041b__0401__0d1210__190d160026__150a00000817__07__1b01____1c030001000c0411________220b__1b01__0f1d1012____1a__20__0f0a16__5f00150601__1d0b08
+ 7:1210__0613____1c1009____1817__120e0b020d0012060f1d1c00000004____06060700011a____1a00041f021c____04__02__1a171c__0600010606__0c01000011011a____010200001d17030102__5e002c011c0a__090218100100091c__28__180d170716__020117001c0808
+ 8:04____1500__010e0109____150b______07021a__1c1e1e0616____1b021c__030a____1c0807__07______13090a__100c170700165f000f__0e0a1e17__13000306000d00__1a14____141602__08______330f1a06001e__04100a__________051e0a11__17__060d__091d17__
+ 9:__210400____1801160517____3d17040e10083d__061a030017__0611__5c125e5f__09__0d16cfd8e90b0a01__0e__1b151700__04000015__06__131c11____15____1917__1b0f__04__16__06________37070008__1a020b10000e__
+
+ 1:234c02ecbbfbafa3ed18510abd11fa724fcda2018a1a8342cf064bbde548b12b07df44ba7191d9606ef4081ffde5ad46a5069d9f7f543bedb9c861bf29c7e205132eda9382b0bc2c5c4b45f919cf3a9f1cb74151f6d551f4480c82b2cb24cc5b028aa76eb7b4ab24171ab3cdadb8356f
+ k:zzzz6EzzzzzzD8zzzzzzzzzzzz63zzzzzzAFzzzzzzzzzzzzA0zzzzE9zzzzzzzz69zzzzzzzzzzzzzz1AzzzzzzzzzzzzzzzzzzzzF0zzzz48zzzzzz02zzzzzzzz77zzzzzzzzzzzz9Czzzzzzzzzzzzzzzzzzzz9azzzzzzzzzzzzzzzzzzC7zzzzzzzzzzzzzzzzzzzzzzzzzzzzDBzzzzzzzzzzzzzzzzzzzzA1zzzzzzzzzz50zzzzzzzzzzzzzzzz91zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+ */
+
+
+//useful links:
+//  http://www.jdejong.net/tools/bitwisecalculator.php
+//    https://www.google.co.uk/search?q=ascii+table&espv=210&es_sm=122&tbm=isch&tbo=u&source=univ&sa=X&ei=KsbTUujMNObB0gXB9IGwBA&ved=0CDUQsAQ&biw=1920&bih=912#facrc=_&imgdii=_&imgrc=2U31hF4tTw886M%253A%3BJMtOixefP_tDJM%3Bhttp%253A%252F%252Fwww.asciitable.com%252Findex%252Fasciifull.gif%3Bhttp%253A%252F%252Fwww.asciitable.com%252F%3B715%3B488
+//      http://www3.nd.edu/~busiforc/handouts/cryptography/cryptography%20hints.html
