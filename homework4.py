@@ -10,28 +10,37 @@ def padAttack(cipherText):
     startPosition = BLOCK_SIZE_IN_BYTES * 2
     currentPT = ""
     oracleQuery = pq.PaddingOracle()
-    stepCount = 1
 
     for index in range(endPosition, startPosition, -2):
-        stepHex = ord(stepCount).encode('hex')
-        cipherByte = cipherText[index - 2:index]
+        step = (endPosition - index) / 2;
+        pad = chr(step).encode('hex') * (step + 1)
+        cipherSection = cipherText[index - 2:endPosition]
+
+        if len(pad) != len(cipherSection):
+            raise Exception("CT suffix and pad should be same length")
+
+        padXorCipher = util.hexxor(pad, cipherSection)
+
         for trialByte in [chr(x).encode('hex') for x in range(0, 256)]:
 
-            trialByte = util.hexxor(util.hexxor(trialByte,stepHex),cipherByte)
-            print ("Using trialByte=%")
-            queryString = cipherText[0:index - 2] + trialByte + currentPT
-            if len(queryString) != len(cipherText):
-                raise Exception("Something went wrong building query")
+            trialSection = trialByte + currentPT
 
+            if len(padXorCipher) != len(trialSection):
+                raise Exception("different lengths for trial byte and pad/cipher xor")
+
+            trialPad = util.hexxor(trialSection,padXorCipher)
+
+            queryString = cipherText[0:index - 2] + trialPad
             queryResult = oracleQuery.query(queryString)
 
             if queryResult == True:
                 print "Match with byte: ", trialByte
                 currentPT += trialByte
-                stepCount++
                 break
+
+    return currentPT
 
 
 
 if __name__ == '__main__':
-    padAttack(TARGET_CIPHERTEXT)
+    print padAttack(TARGET_CIPHERTEXT)
